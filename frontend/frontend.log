@@ -1,0 +1,71 @@
+
+> jarvis-frontend@1.0.0 dev
+> next dev
+
+   ▲ Next.js 14.0.4
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 1768ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.7s (1018 modules)
+ ✓ Compiled in 227ms (516 modules)
+ ✓ Compiled in 264ms (516 modules)
+ ⨯ Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/yogeshgurani/jarvis-agent/frontend'
+Error: ENOENT: no such file or directory, scandir '/Users/yogeshgurani/jarvis-agent/frontend/app'
+    at async Object.readdir (node:internal/fs/promises:956:18)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:39:29
+    at async Promise.all (index 0)
+    at async recursiveReadDir (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+    at async Promise.all (index 0)
+    at async BatchedFileReader.load (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/Users/yogeshgurani/jarvis-agent/frontend/app'
+}
+Error: ENOENT: no such file or directory, scandir '/Users/yogeshgurani/jarvis-agent/frontend/app'
+    at async Object.readdir (node:internal/fs/promises:956:18)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:39:29
+    at async Promise.all (index 0)
+    at async recursiveReadDir (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+    at async Promise.all (index 0)
+    at async BatchedFileReader.load (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/Users/yogeshgurani/jarvis-agent/frontend/app'
+}
+ ⨯ unhandledRejection: Error: ENOENT: no such file or directory, scandir '/Users/yogeshgurani/jarvis-agent/frontend/app'
+    at async Object.readdir (node:internal/fs/promises:956:18)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:39:29
+    at async Promise.all (index 0)
+    at async recursiveReadDir (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+    at async Promise.all (index 0)
+    at async BatchedFileReader.load (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/Users/yogeshgurani/jarvis-agent/frontend/app'
+}
+ ⨯ unhandledRejection: Error: ENOENT: no such file or directory, scandir '/Users/yogeshgurani/jarvis-agent/frontend/app'
+    at async Object.readdir (node:internal/fs/promises:956:18)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:39:29
+    at async Promise.all (index 0)
+    at async recursiveReadDir (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+    at async Promise.all (index 0)
+    at async BatchedFileReader.load (/Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+    at async /Users/yogeshgurani/jarvis-agent/frontend/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/Users/yogeshgurani/jarvis-agent/frontend/app'
+}
+ ⨯ Module not found: Error: Can't resolve 'next-flight-client-entry-loader' in '/Users/yogeshgurani/jarvis-agent/frontend'
+[?25h
