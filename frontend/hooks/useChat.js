@@ -19,11 +19,13 @@ export function useChat() {
   const [isTyping, setIsTyping] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
+  const [isMicOn, setIsMicOn] = useState(true)
   const wsRef = useRef(null)
   const conversationHistory = useRef([])
   const messageCount = useRef(1)
   const isTypingRef = useRef(false)
   const isSpeakingRef = useRef(false)
+  const isMicOnRef = useRef(true)
   const listeningActive = useRef(false)
   const abortControllerRef = useRef(null)
   const typingTimeoutRef = useRef(null)
@@ -31,6 +33,7 @@ export function useChat() {
 
   useEffect(() => { isTypingRef.current = isTyping }, [isTyping])
   useEffect(() => { isSpeakingRef.current = isSpeaking }, [isSpeaking])
+  useEffect(() => { isMicOnRef.current = isMicOn }, [isMicOn])
 
   useEffect(() => {
     const cleanup = initVoices()
@@ -67,11 +70,11 @@ export function useChat() {
   }, [])
 
   const resumeListening = useCallback(() => {
-    if (listeningActive.current) return
+    if (!isMicOnRef.current || listeningActive.current) return
     listeningActive.current = true
     setIsListening(true)
     startListening(null, (finalTranscript) => {
-      if (finalTranscript.trim() && !isTypingRef.current && !isSpeakingRef.current) {
+      if (finalTranscript.trim() && !isTypingRef.current && !isSpeakingRef.current && isMicOnRef.current) {
         handleSend(finalTranscript)
       }
     }, null, null, (active) => {
@@ -86,8 +89,20 @@ export function useChat() {
     stopListening()
   }, [])
 
+  const toggleMic = useCallback(() => {
+    setIsMicOn(prev => {
+      const newState = !prev
+      if (newState) {
+        setTimeout(() => resumeListening(), 100)
+      } else {
+        pauseListening()
+      }
+      return newState
+    })
+  }, [resumeListening, pauseListening])
+
   const handleSend = useCallback(async (text) => {
-    if (!text || !text.trim()) return
+    if (!text || !text.trim() || !isMicOnRef.current) return
 
     const userMessage = { role: 'user', content: text }
     setMessages(prev => [...prev, userMessage])
@@ -139,12 +154,16 @@ export function useChat() {
       setMessages(prev => [...prev, { role: 'assistant', content: data.response }])
       setIsTyping(false)
 
-      setIsSpeaking(true)
-      pauseListening()
-      await speak(data.response)
-      if (mountedRef.current) {
-        setIsSpeaking(false)
-        resumeListening()
+      if (isMicOnRef.current) {
+        setIsSpeaking(true)
+        pauseListening()
+        await speak(data.response)
+        if (mountedRef.current) {
+          setIsSpeaking(false)
+          if (isMicOnRef.current) {
+            resumeListening()
+          }
+        }
       }
     } catch (error) {
       if (error.name === 'AbortError') return
@@ -181,14 +200,18 @@ export function useChat() {
           })
           setIsTyping(false)
 
-          setIsSpeaking(true)
-          pauseListening()
-          speak(fullResponse).then(() => {
-            if (mountedRef.current) {
-              setIsSpeaking(false)
-              resumeListening()
-            }
-          })
+          if (isMicOnRef.current) {
+            setIsSpeaking(true)
+            pauseListening()
+            speak(fullResponse).then(() => {
+              if (mountedRef.current) {
+                setIsSpeaking(false)
+                if (isMicOnRef.current) {
+                  resumeListening()
+                }
+              }
+            })
+          }
         }
       },
       () => console.log('WS connected'),
@@ -200,17 +223,11 @@ export function useChat() {
     }
   }, [resumeListening, pauseListening, clearTypingTimeout])
 
-  const toggleVoice = useCallback(() => {
-    if (isListening) {
-      pauseListening()
-    } else {
-      resumeListening()
-    }
-  }, [isListening, pauseListening, resumeListening])
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      resumeListening()
+      if (isMicOnRef.current) {
+        resumeListening()
+      }
     }, 1500)
     return () => {
       clearTimeout(timer)
@@ -230,6 +247,7 @@ export function useChat() {
     isTyping,
     isListening,
     isSpeaking,
-    toggleVoice
+    isMicOn,
+    toggleMic
   }
 }

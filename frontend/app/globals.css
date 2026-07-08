@@ -222,6 +222,13 @@ body {
   animation: statusPulse 2s ease-in-out infinite;
 }
 
+.status-offline {
+  width: 10px;
+  height: 10px;
+  background: #ff4444;
+  border-radius: 50%;
+}
+
 @keyframes statusPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }

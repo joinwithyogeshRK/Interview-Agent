@@ -2,10 +2,10 @@
 
 import { useEffect, useState, memo } from 'react'
 import { motion } from 'framer-motion'
-import { BsRobot } from 'react-icons/bs'
+import { BsRobot, BsMic, BsMicMute } from 'react-icons/bs'
 import { FiWifi, FiClock } from 'react-icons/fi'
 
-export default memo(function Header() {
+export default memo(function Header({ isMicOn, onToggleMic }) {
   const [currentTime, setCurrentTime] = useState('')
 
   useEffect(() => {
@@ -51,9 +51,31 @@ export default memo(function Header() {
             <span>Connected</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="status-online"></div>
-            <span>Online</span>
+            <div className={isMicOn ? 'status-online' : 'status-offline'}></div>
+            <span>{isMicOn ? 'Online' : 'Offline'}</span>
           </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onToggleMic}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
+              isMicOn
+                ? 'bg-jarvis-blue/20 border border-jarvis-blue/50 text-jarvis-blue'
+                : 'bg-red-500/20 border border-red-500/50 text-red-400'
+            }`}
+          >
+            {isMicOn ? (
+              <>
+                <BsMic className="text-lg" />
+                <span className="text-sm font-medium">Mic On</span>
+              </>
+            ) : (
+              <>
+                <BsMicMute className="text-lg" />
+                <span className="text-sm font-medium">Mic Off</span>
+              </>
+            )}
+          </motion.button>
         </div>
       </div>
     </motion.header>

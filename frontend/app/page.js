@@ -3,7 +3,6 @@
 import { useChat } from '../hooks/useChat'
 import Header from '../components/Header'
 import ChatArea from '../components/ChatArea'
-import ChatInput from '../components/ChatInput'
 import BackgroundEffects from '../components/BackgroundEffects'
 
 export default function Home() {
@@ -12,7 +11,8 @@ export default function Home() {
     isTyping,
     isListening,
     isSpeaking,
-    toggleVoice
+    isMicOn,
+    toggleMic
   } = useChat()
 
   return (
@@ -20,16 +20,9 @@ export default function Home() {
       <BackgroundEffects />
 
       <div className="chat-container">
-        <Header />
+        <Header isMicOn={isMicOn} onToggleMic={toggleMic} />
 
         <ChatArea messages={messages} isTyping={isTyping} />
-
-        <ChatInput
-          onToggleVoice={toggleVoice}
-          isListening={isListening}
-          isTyping={isTyping}
-          isSpeaking={isSpeaking}
-        />
       </div>
     </div>
   )
